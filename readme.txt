@@ -26,6 +26,18 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
+
+Installation
+============
+Pre-requisites:
+- organize your media data in /wp-content/uploads/ into sub-folders, e.g. create a folder /wp-content/uploads/protected
+- creation of sub-folders is possible with plugins like "WordPress Media Library Folders"
+
+Copy source to WordPress installation:
+- Just copy the whole project into the WordPress directory /wp-content/plugins/protected-file-access/
+- Go to the plugins settings page of WordPress and enable the plugin
+- Go to the Settings page of the plugin 
+
 How does it work?
 =================
 - Go to the settings page of the plugin
@@ -47,3 +59,4 @@ The plugin uses two different access modes:
 2) getimg.php in the plugins directory is called directly without the overhead of WordPress. Authorization has been done during the
    rewrite process and an encrypted time stamp is attached to the link. This is validated before the file is deliverd. This fast method
    is necessary for galleries to load reasonably fast. It is NOT used for links in <a href="..."> tags. 
+   
