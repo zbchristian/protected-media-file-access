@@ -1,0 +1,25 @@
+
+div.pmf_main {
+	background-color: white;
+	padding: 10px;
+}
+
+div.pmf_info {
+	background-color: LightBlue;
+	padding: 10px;
+}
+div.pmf_info dt{
+	font-weight: bold;
+}
+
+table.form-table { 
+	cellpadding: 0;
+	margin-top: 5px;
+	border: 2px solid Lightgray;
+}
+.form-table th{
+	padding-left: 10px;
+}	
+
+div.pmf_info  ul {	list-style: disc; }
+div.pmf_info  ul li { 	margin-left: 20px; }
