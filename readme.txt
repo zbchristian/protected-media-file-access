@@ -26,12 +26,18 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
+Description
+===========
+The plugin allows to distinguish between public and private media files. The private media files are only accessible 
+for logged-in users. This is achieved by means of a separate folder (e.g. uploads/protected/ ) for the protected files.
+
 
 Installation
 ============
 Pre-requisites:
 - organize your media data in /wp-content/uploads/ into sub-folders, e.g. create a folder /wp-content/uploads/protected
 - creation of sub-folders is possible with plugins like "WordPress Media Library Folders"
+- openssl enabled in webserver (needed for fast access via getimg.php)
 
 Copy source to WordPress installation:
 - Just copy the whole project into the WordPress directory /wp-content/plugins/protected-file-access/
