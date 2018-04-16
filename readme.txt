@@ -30,7 +30,7 @@ Description
 ===========
 The plugin allows to distinguish between public and private media files. The private media files are only accessible 
 for logged-in users. This is achieved by means of a separate folder (e.g. uploads/protected/ ) for the protected files.
-
+For a complete protection of private posts/pages, a plugin like "Content Control" can be used.
 
 Installation
 ============
