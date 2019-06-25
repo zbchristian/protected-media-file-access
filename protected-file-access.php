@@ -66,15 +66,15 @@ function rewrite_links_to_protected_folder($content){
 	if(($protected_dir = get_path2protected("url")) === false) return $content;
 	$protected_dir = preg_quote($protected_dir,"/");
 	$pat = "/((http|https):\/\/[a-z0-9\.\-\_\/]*)\/*".$protected_dir."\/*([a-z0-9\.\/\-_]+)/i";
+	$use_getimg = _ENABLE_GETIMG_ &&  extension_loaded('openssl');
 	// check for image in protected folder
-	if( _ENABLE_GETIMG_ && wp_validate_auth_cookie('','logged_in') !== false) {
+	if( $use_getimg && wp_validate_auth_cookie('','logged_in') !== false) {
 		$cmd = _GETIMGURL_."?"._GETPARM_."=";
 		foreach(_MIME_IMG_ as $mime) {
 			// do NOT replace href links (causes problems with the gallery lighbox) 
 			$patimg = '/(?<! href=")((http|https):\/\/[a-z0-9\.\-\_\/]*)\/*'.$protected_dir."\/*([a-z0-9\.\/\-_]+\.".$mime["ext"].')/i';
 			$cryptotag = urlencode(txt_encrypt(strval(time())."_".$mime["mime"]));
 			$content = preg_replace($patimg,$cmd."$3".'&'._ENCTAG_.'='.$cryptotag,$content);
-//			$content = preg_replace($patimg,$cmd."$3".'&'._ENCTAG_.'='.urlencode(txt_encrypt(strval(time())."_".$mime["mime"]."_$3")),$content);
 		}
 	}
 	$cmd = "/"._GETFUNC_."?"._GETPARM_."=";
