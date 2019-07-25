@@ -106,7 +106,7 @@ function getfile_from_protected_folder($query) {
 				$current_url .= $_SERVER['REQUEST_URI'];
 				if(!isset($query->query_vars["dest"])) $login_url = add_query_arg( 'dest', urlencode($current_url), $login_url );
 				if(!isset($query->query_vars["type"])) $login_url = add_query_arg( 'type', 'download', $login_url );
-				wp_redirect( $login_url );	// show login page 
+				wp_safe_redirect( $login_url );	// show login page 
 			}
 			send_file($fname);
 			exit();
@@ -124,7 +124,7 @@ function pmf_login_failed( $username ) {
 				// if there's a valid referrer, and it's not the default log-in screen
 				if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') ) {
 					$referr = add_query_arg( 'login', 'failed', $referrer );
-					wp_redirect( $referr );
+					wp_safe_redirect( $referr );
 				}
 				break;
 			default: break;
@@ -151,8 +151,9 @@ function show_login_form() {
 	if(($txt_failed	= get_pmf_option('wp_login_form_failed_msg')) === false) $txt_failed = _LOGIN_FORM_DEFS_["err"]; 
 	$dest = get_site_url();
 	if(isset($_SERVER['HTTP_REFERER'])) $dest = $_SERVER['HTTP_REFERER'];
+	if(isset($_GET['redirect_to'])) $dest = $_GET['redirect_to']; // if "dest" not set, use the redirect_to tag
 	if(isset($_GET['dest'])) $dest = $_GET['dest'];
-	if(isset($_GET['redirect_to'])) $dest = $_GET['redirect_to'];
+
 	$dest = esc_url($dest,array('http', 'https'),' ');
 	echo '<div class="pmf_login_form">';
 	if(isset($_GET['login']) && $_GET['login']==="failed") echo "<strong>$txt_failed</strong>";
